@@ -6,7 +6,7 @@ def begin():
     while(again):
         user_input = input()
         if(user_input.isnumeric()):
-            message = "Please do enter a number. " + user_input + " is not a valid entry. " + " Press start first then you can enter a number."
+            message = "Please do enter a number. " + user_input + " is not a valid entry. " + " Press enter start first then you can enter a number."
             print(message)
             again = True
         elif(user_input == "start"):
@@ -52,7 +52,6 @@ def hint_three(cpu_number):
     for i in range(10):
         n = randrange(1,100)
         randomlist.append(n)
-    
     randomlist.append(cpu_number)
     random.shuffle(randomlist)
     print(randomlist)
@@ -64,6 +63,8 @@ def hint_four(cpu_number, user_number):
 def score(cpu_number, user_number):
     if (cpu_number<user_number):
         print("Yes humans win!")
+    elif (cpu_number==user_number):
+        print("Tie")    
     else:
         print("Booo! cpu wins and humans lose!")
 
@@ -74,14 +75,13 @@ while(game):
     print("Please enter start to start the game or enter end to end the game")
     user_input = input()
     if(user_input.isnumeric()):
-        message = "Please do enter a number. " + user_input + " is not a valid entry. " + " Press start first then you can enter a number."
+        message = "Please do not enter a number. " + user_input + " is not a valid entry. " + " Press start first then you can enter a number."
         print(message)
         again = True
     elif(user_input == "start"):
         message = "Great Let's begin!"
         print(message)
         cpu_number = randrange(1,100)
-        print(cpu_number)
         round = 0
         cpu_count = 0
         user_count = 10
@@ -94,7 +94,7 @@ while(game):
             if (user_num == cpu_number):
                 print("GG")
                 print("User score:  " + str(user_count) + " and the Cpu score: " + str(cpu_count))
-                score()
+                score(user_num,cpu_number)
                 on = False
             elif(user_num<1) or (user_num>100):
                 print("invalid entry")
@@ -117,18 +117,19 @@ while(game):
                 elif(round == 4):
                     hint_four(cpu_number, user_num)
                     user_count=user_count-3
+                    cpu_count=cpu_count+3
                     on = True
                 else:
                     print("No more hints, Sorry!")
                     print("User score: {} and the Cpu score: {}".format(cpu_count, cpu_count))
-                    score()
+                    score(user_num,cpu_number)
                     on = False
     elif(user_input == "end"):
         message = "Bye, Bye!"
         print(message)
         quit()
     else:
-        message = "Please enter start or stop any other"
+        message = "Please enter start or end"
         print(message)
     again = True
 
